@@ -1,0 +1,48 @@
+Private Sub LastRowNumsANDLastColumnNum_Click()
+
+Dim last_col As Integer
+Dim numbaRow As Integer
+
+last_col = FindNumberOfColumns()
+numbaRow = FindNumRowsEachUsedColumn(last_col)
+ 
+End Sub
+
+Public Function FindNumberOfColumns() As Integer
+
+    Dim last_col_1 As Integer
+    
+    'Finds the last used column number
+    Set last_cell = ActiveSheet.Cells.SpecialCells(xlCellTypeLastCell)
+    last_col_1 = last_cell.Column
+    MsgBox ("The Last Column is " & last_col_1)
+    FindNumberOfColumns = last_col_1
+    
+End Function
+
+Public Function FindNumRowsEachUsedColumn(nColumns As Integer) As Integer
+
+Dim u As Integer
+Dim ColumnNumber As Long
+
+
+
+'This is the array that holds the last row number for each column starting from 1
+' and going to the last column from the above code
+Dim last_Row_EachCol() As Integer
+ReDim last_Row_EachCol(1 To nColumns) As Integer
+
+
+'Searches column by column finding the last row then prints the # of rows in each
+' specific column
+    For u = 1 To nColumns
+
+        'Last Row in each Column
+        
+        last_Row_EachCol(u) = Cells(Rows.Count, u).End(xlUp).Row
+        MsgBox ("Last Row in Column #" & u & " is " & last_Row_EachCol(u))
+
+    Next
+End Function
+
+
