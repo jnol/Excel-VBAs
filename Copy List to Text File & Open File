@@ -1,0 +1,42 @@
+Private Sub CommandButton1_Click()
+
+Dim FilePath As String
+Dim CellData As String
+Dim s As Integer
+
+Dim LastCol As Long
+Dim LastRow As Long
+
+Dim MyTxtFile
+Dim TextFileName As String
+
+TextFileName = Application.InputBox("What would you like to name your new text file? " & vbCrLf & _
+    "(DO NOT PUT EXTENSIONS OR SPACES - NO .TXT!!!):", "", "FeatureParameterList")
+
+'Find last row and last column
+LastCol = ActiveSheet.UsedRange.SpecialCells(xlCellTypeLastCell).Column
+LastRow = ActiveSheet.UsedRange.SpecialCells(xlCellTypeLastCell).Row
+
+'Reset default FilePath if necessary
+'Me.Application.DefaultFilePath = "C:\Users\jnolan41\Documents"
+
+'Set file path
+FilePath = Application.DefaultFilePath & "\" & TextFileName & ".txt" ' "\ParameterList.txt"
+
+'Print parameters to txt file
+Open FilePath For Output As #1
+
+For s = 2 To LastRow
+    CellData = Cells(s, 1).Value
+    Print #1, CellData
+Next s
+
+Close #1
+
+
+
+'Open the new text file
+    MyTxtFile = Shell("C:\Windows\system32\notepad.exe C:\Users\jnolan41\Documents\" & TextFileName & ".txt", 1) 'ParameterList.txt"
+
+
+End Sub
