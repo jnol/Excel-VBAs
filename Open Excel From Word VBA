@@ -1,0 +1,21 @@
+Sub automateword()
+
+Dim excelApp As Object
+
+
+
+    Set excelApp = CreateObject("excel.Application")
+
+
+    excelApp.Workbooks.Open "C:\Test.xlsx"
+
+
+    excelApp.Visible = True
+    
+    Worksheets("Sheet1").Activate
+    ActiveSheet.Cells(1, 1) = "Hello World"
+    
+    
+
+
+End Sub
