@@ -1,0 +1,64 @@
+
+
+Private Sub CommandButton1_Click()
+
+Application.ScreenUpdating = False
+
+Dim current_column As Integer
+Dim current_row As Integer
+Dim char_num As Integer
+
+
+Dim content_temp As String
+Dim content_working As String
+Dim content_final As String
+
+'Rows
+For current_row = 9 To 61
+    'Columns
+    For current_column = 10 To 10
+        
+        content_temp = ""
+        content_final = ""
+        content_temp = Cells(current_row, current_column)
+        content_working = content_temp
+        string_length = Len(content_temp)
+        'MsgBox (string_length)
+        
+        Dim buff() As String
+        ReDim buff(string_length - 1)
+        
+        For i = 1 To Len(content_working)
+            buff(i - 1) = Mid$(content_temp, i, 1)
+        Next i
+   
+        'String
+        
+        For char_num = 1 To string_length - 1
+            current_character_value = Asc(buff(char_num))
+            If current_character_value = 12 Then
+                buff(char_num) = " "
+                'content_working.Chars (char_num)
+                'Mid(content_working, char_num, 1) = " "
+                'MsgBox ("something")
+            Else
+            End If
+        Next char_num
+        
+    
+        Cells(current_row, current_column) = ""
+        
+        For q = 1 To string_length
+        Cells(current_row, current_column) = Cells(current_row, current_column) & buff(q - 1)
+        Next q
+    
+    
+        'Cells(current_row, current_column) = content_working
+    
+    Next current_column
+Next current_row
+
+
+Application.ScreenUpdating = True
+
+End Sub
